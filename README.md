@@ -8,16 +8,21 @@ Kotlin 1.7.0
 
 Asciidoc template located in `/src/docs/asciidoc/index.adoc`
 
+---
+
+Tasks
+
 Run tests and output completed docs in `build/docs/asciidoc/index.html`
 ~~~
 ./gradlew asciidoctor
 ~~~
 
+Run tests only - does not generate index.html
 ~~~
 ./gradlew test
 ~~~
 
-Create deployable jar
+Run all tasks and create deployable jar
 ~~~
 ./gradlew bootJar
 ~~~
