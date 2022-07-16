@@ -4,6 +4,8 @@ Building up example with [Spring REST Docs 2.0.6](https://github.com/spring-proj
 
 Verify Restful Api and generate docs from Tests `kotlin/griffio/kollchap/demo/DemoApplicationTests.kt`
 
+Spring Boot 2.7.1
+
 Kotlin 1.7.0
 
 Asciidoc template located in `/src/docs/asciidoc/index.adoc`
