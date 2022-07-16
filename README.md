@@ -2,9 +2,16 @@
 
 Building up example with [Spring REST Docs 2.0.6](https://github.com/spring-projects/spring-restdocs)
 
+Verify Restful Api and generate docs from Tests `kotlin/griffio/kollchap/demo/DemoApplicationTests.kt`
+
 Kotlin 1.7.0
 
 Asciidoc template located in `/src/docs/asciidoc/index.adoc`
+
+Run tests and output completed docs in `build/docs/asciidoc/index.html`
+~~~
+./gradlew asciidoctor
+~~~
 
 ~~~
 ./gradlew test
