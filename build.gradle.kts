@@ -29,7 +29,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }
-//@AutoConfigureRestDocs
+
 kotlin {
     // https://blog.jetbrains.com/kotlin/2021/11/gradle-jvm-toolchain-support-in-the-kotlin-plugin/
     jvmToolchain {
@@ -53,7 +53,8 @@ tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
 }
-
+// copy index.html 
+// https://docs.spring.io/spring-boot/docs/2.1.x/reference/html/boot-features-developing-web-applications.html#boot-features-spring-mvc-static-content
 tasks.bootJar {
     dependsOn(tasks.asciidoctor)
     from(tasks.asciidoctor.get().outputDir) {
