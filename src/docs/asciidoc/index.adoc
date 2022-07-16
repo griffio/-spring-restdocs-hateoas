@@ -1,0 +1,143 @@
+= RESTful Kollchap API Guide
+griffio;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+
+[[overview]]
+= Overview
+
+[[overview_http_verbs]]
+== HTTP verbs
+
+RESTful Kollchap tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PATCH`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview_http_status_codes]]
+== HTTP status codes
+
+RESTful characters tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+[[overview_headers]]
+== Headers
+
+Every response has the following header(s):
+
+include::{snippets}/headers-example/response-headers.adoc[]
+
+[[overview_errors]]
+== Errors
+
+Whenever an error response (status code >= 400) is returned, the body will contain a JSON object
+that describes the problem. The error object has the following structure:
+
+include::{snippets}/error-example/response-fields.adoc[]
+
+For example, a request that attempts to apply a non-existent tag to a character will produce a
+`400 Bad Request` response:
+
+include::{snippets}/error-example/http-response.adoc[]
+
+[[overview_hypermedia]]
+== Hypermedia
+
+RESTful Kollchap uses hypermedia and resources include links to other resources in their
+responses. Responses are in https://github.com/mikekelly/hal_specification[Hypertext
+Application Language (HAL)] format. Links can be found beneath the `_links` key. Users of
+the API should not create URIs themselves, instead they should use the above-described
+links to navigate from resource to resource.
+
+[[resources]]
+= Resources
+
+[[resources_index]]
+== Index
+
+The index provides the entry point into the service.
+
+[[resources_index_access]]
+=== Accessing the index
+
+A `GET` request is used to access the index
+
+operation::index-example[snippets='response-fields,http-response,links']
+
+[[resources_characters]]
+== Characters
+
+The Characters resources is used to create and list characters
+
+[[resources_characters_list]]
+=== Listing characters
+
+A `GET` request will list all of the service's characters.
+
+operation::characters-list-example[snippets='response-fields,curl-request,http-response']
+
+[[resources_characters_create]]
+=== Creating a character
+
+A `POST` request is used to create a character.
+
+operation::characters-create-example[snippets='request-fields,curl-request,http-response']
+
+[[resources_character]]
+== Character
+
+The Character resource is used to retrieve, update, and delete individual characters
+
+[[resources_character_links]]
+=== Links
+
+include::{snippets}/character-get-example/links.adoc[]
+
+[[resources_character_retrieve]]
+=== Retrieve a character
+
+A `GET` request will retrieve the details of a character
+
+operation::character-get-example[snippets='response-fields,curl-request,http-response']
+
+
