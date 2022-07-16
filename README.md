@@ -1,6 +1,6 @@
 # Kollchap spring hateoas rest-docs
 
-Building up example with (Spring REST Docs 2.0.6)[https://github.com/spring-projects/spring-restdocs]
+Building up example with [Spring REST Docs 2.0.6](https://github.com/spring-projects/spring-restdocs)
 
 Kotlin 1.7.0
 
