@@ -4,6 +4,8 @@ Building up example with [Spring REST Docs 2.0.6](https://github.com/spring-proj
 
 Kotlin 1.7.0
 
+Asciidoc template located in `/src/docs/asciidoc/index.adoc`
+
 ~~~
 ./gradlew test
 ~~~
