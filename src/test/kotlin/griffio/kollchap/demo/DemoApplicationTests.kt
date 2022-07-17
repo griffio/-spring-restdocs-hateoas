@@ -58,7 +58,7 @@ class TestRestDocs(
                         linkWithRel("profile").description("The <<resources_profile,ALPS resource>>")
                     ),
                     responseFields(
-                        subsectionWithPath("_links").description("<<resources_index_links,Links>> to other resources")
+                        subsectionWithPath("_links").description("<<resources_index_access_links,Links>> to other resources")
                     )
                 )
             )
