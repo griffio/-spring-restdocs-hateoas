@@ -10,6 +10,8 @@ Kotlin 1.7.0
 
 Asciidoc template located in `/src/docs/asciidoc/index.adoc`
 
+Sample output doc can be [viewed](sample-doc/index.html) 
+
 ---
 
 Tasks
