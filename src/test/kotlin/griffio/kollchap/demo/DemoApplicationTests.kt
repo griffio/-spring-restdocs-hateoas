@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.util.StringUtils
 import javax.servlet.RequestDispatcher
 
 @SpringBootTest(classes = [Application::class])
@@ -127,9 +126,9 @@ class TestRestDocs(
         val create = objectMapper.writeValueAsString(GameCharacter("New Character", "New Background"))
 
         val characterLocation =
-        mvc.perform(post("/characters").contentType("application/json").content(create))
-            .andExpect(status().isCreated)
-            .andReturn().response.getHeader("Location")
+            mvc.perform(post("/characters").contentType("application/json").content(create))
+                .andExpect(status().isCreated)
+                .andReturn().response.getHeader("Location")
 
         val update = objectMapper.writeValueAsString(GameCharacter("Update name", "Update background"))
         val fields = ConstrainedFields(GameCharacter::class.java)
@@ -183,20 +182,11 @@ class TestRestDocs(
     }
 
     private class ConstrainedFields constructor(input: Class<*>) {
-        private val constraintDescriptions: ConstraintDescriptions
-
-        init {
-            constraintDescriptions = ConstraintDescriptions(input)
-        }
-
+        private val constraintDescriptions = ConstraintDescriptions(input)
         fun withPath(path: String): FieldDescriptor {
             return fieldWithPath(path).attributes(
                 key("constraints").value(
-                    StringUtils
-                        .collectionToDelimitedString(
-                            constraintDescriptions
-                                .descriptionsForProperty(path), ". "
-                        )
+                    constraintDescriptions.descriptionsForProperty(path).joinToString(". ")
                 )
             )
         }
