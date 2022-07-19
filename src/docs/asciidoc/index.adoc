@@ -140,4 +140,9 @@ A `GET` request will retrieve the details of a character
 
 operation::character-get-example[snippets='response-fields,curl-request,http-response']
 
+[[resources_character_update]]
+=== Update a Character
 
+A `PATCH` request is used to update a Character
+
+operation::character-update-example[snippets='request-fields,curl-request,http-response']
