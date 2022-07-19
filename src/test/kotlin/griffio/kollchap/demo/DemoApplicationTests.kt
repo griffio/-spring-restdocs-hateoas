@@ -106,14 +106,15 @@ class TestRestDocs(
     @Test
     fun charactersCreateExample() {
         val bobert: String = objectMapper.writeValueAsString(GameCharacter("Bobert", "Merchant in the dungeon"))
+        val fields = ConstrainedFields(GameCharacter::class.java)
         mvc.perform(post("/characters").contentType("application/json").content(bobert))
             .andExpect(status().isCreated)
             .andDo(
                 document(
                     "characters-create-example",
                     requestFields(
-                        fieldWithPath("name").description("Full name of character"),
-                        fieldWithPath("background").description("Background history and motivation")
+                        fields.withPath("name").description("Full name of character"),
+                        fields.withPath("background").description("Background history and motivation").optional()
                     )
                 )
             )
@@ -145,8 +146,7 @@ class TestRestDocs(
                     requestFields(
                         fields.withPath("name")
                             .description("Full name of character")
-                            .type(JsonFieldType.STRING)
-                            .optional(),
+                            .type(JsonFieldType.STRING),
                         fields.withPath("background")
                             .description("Background history and motivation")
                             .type(JsonFieldType.STRING)
