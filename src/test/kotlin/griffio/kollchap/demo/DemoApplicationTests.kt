@@ -9,18 +9,22 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.hateoas.MediaTypes
+import org.springframework.restdocs.constraints.ConstraintDescriptions
 import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
 import org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders
 import org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel
 import org.springframework.restdocs.hypermedia.HypermediaDocumentation.links
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
+import org.springframework.restdocs.payload.FieldDescriptor
+import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
+import org.springframework.restdocs.snippet.Attributes.key
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.util.StringUtils
 import javax.servlet.RequestDispatcher
 
 @SpringBootTest(classes = [Application::class])
@@ -118,6 +122,41 @@ class TestRestDocs(
     }
 
     @Test
+    fun characterUpdateExample() {
+        val create = objectMapper.writeValueAsString(GameCharacter("New Character", "New Background"))
+
+        val characterLocation =
+        mvc.perform(post("/characters").contentType("application/json").content(create))
+            .andExpect(status().isCreated)
+            .andReturn().response.getHeader("Location")
+
+        val update = objectMapper.writeValueAsString(GameCharacter("Update name", "Update background"))
+        val fields = ConstrainedFields(GameCharacter::class.java)
+
+        mvc.perform(
+            patch(characterLocation)
+                .contentType(MediaTypes.HAL_JSON)
+                .content(update)
+        )
+            .andExpect(status().isNoContent)
+            .andDo(
+                document(
+                    "character-update-example",
+                    requestFields(
+                        fields.withPath("name")
+                            .description("Full name of character")
+                            .type(JsonFieldType.STRING)
+                            .optional(),
+                        fields.withPath("background")
+                            .description("Background history and motivation")
+                            .type(JsonFieldType.STRING)
+                            .optional(),
+                    )
+                )
+            )
+    }
+
+    @Test
     fun errorExample() {
         mvc.perform(
             get("/error")
@@ -141,5 +180,25 @@ class TestRestDocs(
                     )
                 )
             )
+    }
+
+    private class ConstrainedFields constructor(input: Class<*>) {
+        private val constraintDescriptions: ConstraintDescriptions
+
+        init {
+            constraintDescriptions = ConstraintDescriptions(input)
+        }
+
+        fun withPath(path: String): FieldDescriptor {
+            return fieldWithPath(path).attributes(
+                key("constraints").value(
+                    StringUtils
+                        .collectionToDelimitedString(
+                            constraintDescriptions
+                                .descriptionsForProperty(path), ". "
+                        )
+                )
+            )
+        }
     }
 }
