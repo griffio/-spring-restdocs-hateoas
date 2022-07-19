@@ -23,6 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    runtimeOnly("org.hibernate.validator:hibernate-validator")
     // configures asciidoctor plugin with restdocs settings
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
     runtimeOnly("com.h2database:h2")
