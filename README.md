@@ -2,13 +2,13 @@
 
 Building up example with [Spring REST Docs 2.0.6](https://github.com/spring-projects/spring-restdocs)
 
-Verify Restful Api and generate docs from Tests `kotlin/griffio/kollchap/demo/DemoApplicationTests.kt`
+Verify Restful Api and generate docs from Tests [kotlin/griffio/kollchap/demo/DemoApplicationTests.kt](https://github.com/griffio/spring-restdocs-hateoas/blob/master/src/test/kotlin/griffio/kollchap/demo/DemoApplicationTests.kt)
 
 Spring Boot 2.7.1
 
 Kotlin 1.7.0
 
-Asciidoc template located in `/src/docs/asciidoc/index.adoc`
+Asciidoc template located in [/src/docs/asciidoc/index.adoc](https://github.com/griffio/spring-restdocs-hateoas/blob/master/src/docs/asciidoc/index.adoc)
 
 Sample output doc can be [viewed](sample-doc/index.html) 
 
