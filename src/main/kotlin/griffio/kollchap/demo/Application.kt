@@ -1,5 +1,6 @@
 package griffio.kollchap.demo
 
+import griffio.kollchap.demo.GameCharacterAlignment.*
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -25,43 +26,50 @@ class Application : RepositoryRestConfigurer {
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Slammer Kyntire",
-                    background = "First-level Fighter searching for the Sword of the Sorcerer."
+                    background = "First-level Fighter searching for the Sword of the Sorcerer.",
+                    level = 1, armourClass = 14, hitPoints = 7, alignment = Lawful
                 )
             )
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Hotfa Nap",
-                    background = "First-level Sorceress from a nomad tribe in the Mesta Desert."
+                    background = "First-level Sorceress from a nomad tribe in the Mesta Desert.",
+                    level = 1, armourClass = 4, hitPoints = 5, alignment = Neutral
                 )
             )
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Gripper 'The Skin' Longshank",
-                    background = "First-level Thief from a tribe on the Albine empire border."
+                    background = "First-level Thief from a tribe on the Albine empire border.",
+                    level = 1, armourClass = 4, hitPoints = 5, alignment = Neutral
                 )
             )
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Zhod Thobi",
-                    background = "First-level Cleric joins party as N.P.C and receives equal share of treasure."
+                    background = "First-level Cleric joins party as N.P.C and receives equal share of treasure.",
+                    level = 1, armourClass = 17, hitPoints = 5, alignment = Lawful
                 )
             )
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Belisarius",
-                    background = "First-level Thief N.P.C survivor. Currently hiding, if located will join party."
+                    background = "First-level Thief N.P.C survivor. Currently hiding, if located will join party.",
+                    level = 1, armourClass = 7, hitPoints = 2, alignment = Neutral
                 )
             )
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Rosa Dobbit",
-                    background = "First-level Fighter, N.P.C survivor. Currently captive, if released will join party."
+                    background = "First-level Fighter, N.P.C survivor. Currently captive, if released will join party.",
+                    level = 1, armourClass = 9, hitPoints = 4, alignment = Lawful
                 )
             )
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Odric",
-                    background = "Third-level Cleric, N.P.C enemy. Currently in possession of the stolen Statue of Tranfax."
+                    background = "Third-level Cleric, N.P.C enemy. Currently in possession of the stolen Statue of Tranfax.",
+                    level = 1, armourClass = 3, hitPoints = 9, alignment = Chaotic
                 )
             )
         }
