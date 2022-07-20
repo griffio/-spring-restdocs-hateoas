@@ -1,6 +1,7 @@
 package griffio.kollchap.demo
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import griffio.kollchap.demo.GameCharacterAlignment.*
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.notNullValue
 import org.junit.jupiter.api.Test
@@ -94,9 +95,9 @@ class TestRestDocs(
                         linkWithRel("gameCharacter").description("Link to the gameCharacter resource"),
                     ),
                     responseFields(
-                        fieldWithPath("name").description("Full name of character"),
-                        fieldWithPath("background").description("Background history and motivation"),
-                        subsectionWithPath("_links").description("<<resources_character_links,Links>> to other resources")
+                        characterFields().plus(
+                            subsectionWithPath("_links").description("<<resources_character_links,Links>> to other resources")
+                        )
                     )
                 )
             )
@@ -104,16 +105,22 @@ class TestRestDocs(
 
     @Test
     fun charactersCreateExample() {
-        val bobert: String = objectMapper.writeValueAsString(GameCharacter("Bobert", "Merchant in the dungeon"))
-        val fields = ConstrainedFields(GameCharacter::class.java)
+        val character = GameCharacter(
+            "Bobert",
+            "Merchant in the dungeon",
+            level = 2,
+            armourClass = 3,
+            hitPoints = 6,
+            alignment = Neutral
+        )
+        val bobert: String = objectMapper.writeValueAsString(character)
         mvc.perform(post("/characters").contentType("application/json").content(bobert))
             .andExpect(status().isCreated)
             .andDo(
                 document(
                     "characters-create-example",
                     requestFields(
-                        fields.withPath("name").description("Full name of character"),
-                        fields.withPath("background").description("Background history and motivation").optional()
+                        characterFields()
                     )
                 )
             )
@@ -123,15 +130,15 @@ class TestRestDocs(
 
     @Test
     fun characterUpdateExample() {
-        val create = objectMapper.writeValueAsString(GameCharacter("New Character", "New Background"))
+        val create = objectMapper.writeValueAsString(GameCharacter("New Character", "New Background", 1, 2, 3, Neutral))
 
         val characterLocation =
             mvc.perform(post("/characters").contentType("application/json").content(create))
                 .andExpect(status().isCreated)
                 .andReturn().response.getHeader("Location")
 
-        val update = objectMapper.writeValueAsString(GameCharacter("Update name", "Update background"))
-        val fields = ConstrainedFields(GameCharacter::class.java)
+        val update =
+            objectMapper.writeValueAsString(GameCharacter("Update name", "Update background", 2, 3, 4, Chaotic))
 
         mvc.perform(
             patch(characterLocation)
@@ -143,13 +150,7 @@ class TestRestDocs(
                 document(
                     "character-update-example",
                     requestFields(
-                        fields.withPath("name")
-                            .description("Full name of character")
-                            .type(JsonFieldType.STRING),
-                        fields.withPath("background")
-                            .description("Background history and motivation")
-                            .type(JsonFieldType.STRING)
-                            .optional(),
+                        characterFields()
                     )
                 )
             )
@@ -179,6 +180,30 @@ class TestRestDocs(
                     )
                 )
             )
+    }
+
+    private fun characterFields(): List<FieldDescriptor> {
+        val fields = ConstrainedFields(GameCharacter::class.java)
+        return listOf(
+            fields.withPath("name")
+                .description("Full name of character")
+                .type(JsonFieldType.STRING),
+            fields.withPath("background")
+                .description("Background history and motivation")
+                .type(JsonFieldType.STRING),
+            fields.withPath("level")
+                .description("Experience level")
+                .type(JsonFieldType.NUMBER),
+            fields.withPath("armourClass")
+                .description("Armour protection level")
+                .type(JsonFieldType.NUMBER),
+            fields.withPath("hitPoints")
+                .description("Hit point level")
+                .type(JsonFieldType.NUMBER),
+            fields.withPath("alignment")
+                .description("Character is Chaotic, Lawful or Neutral")
+                .type(JsonFieldType.STRING)
+        )
     }
 
     private class ConstrainedFields constructor(input: Class<*>) {
