@@ -58,6 +58,12 @@ class Application : RepositoryRestConfigurer {
                     background = "First-level Fighter, N.P.C survivor. Currently captive, if released will join party."
                 )
             )
+            gameCharacterRepository.save(
+                GameCharacter(
+                    name = "Odric",
+                    background = "Third-level Cleric, N.P.C enemy. Currently in possession of the stolen Statue of Tranfax."
+                )
+            )
         }
     }
 }
