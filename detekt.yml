@@ -1,0 +1,10 @@
+style:
+  MaxLineLength:
+    active: true
+    maxLineLength: 130
+  WildcardImport:
+    active: false
+performance:
+  active: true
+  SpreadOperator:
+    active: false
