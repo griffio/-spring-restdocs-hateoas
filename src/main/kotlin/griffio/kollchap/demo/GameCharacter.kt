@@ -3,7 +3,6 @@ package griffio.kollchap.demo
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.jpa.domain.AbstractPersistable
 import javax.persistence.Entity
-import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
