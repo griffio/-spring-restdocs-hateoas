@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPat
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import javax.servlet.RequestDispatcher
 
+
 @SpringBootTest(classes = [Application::class])
 @AutoConfigureRestDocs
 @AutoConfigureMockMvc
@@ -201,9 +202,13 @@ class TestRestDocs(
                 .description("Hit point level")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("alignment")
-                .description("Character is Chaotic, Lawful or Neutral")
+                .description(alignmentDescription())
                 .type(JsonFieldType.STRING)
         )
+    }
+
+    private fun alignmentDescription(): String {
+       return GameCharacterAlignment.values().joinToString(prefix = "One of ", separator = ", ")
     }
 
     private class ConstrainedFields constructor(input: Class<*>) {
