@@ -68,7 +68,8 @@ class Application : RepositoryRestConfigurer {
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Odric",
-                    background = "Third-level Cleric, N.P.C enemy. Currently in possession of the stolen Statue of Tranfax.",
+                    background = """Third-level Cleric, N.P.C enemy.
+                        | Currently in possession of the stolen Statue of Tranfax.""".trimMargin(),
                     level = 1, armourClass = 3, hitPoints = 9, alignment = Chaotic
                 )
             )

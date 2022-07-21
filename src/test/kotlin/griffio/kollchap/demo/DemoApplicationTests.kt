@@ -31,7 +31,7 @@ import javax.servlet.RequestDispatcher
 @SpringBootTest(classes = [Application::class])
 @AutoConfigureRestDocs
 @AutoConfigureMockMvc
-class TestRestDocs(
+class DemoApplicationTests(
     @Autowired val objectMapper: ObjectMapper,
     @Autowired val mvc: MockMvc
 ) {
@@ -45,7 +45,7 @@ class TestRestDocs(
                 document(
                     "headers-example",
                     responseHeaders(
-                        headerWithName("Content-Type").description("The Content-Type of the payload, e.g. `application/hal+json`")
+                        headerWithName("Content-Type").description("The Content-Type of the payload `application/hal+json`")
                     )
                 )
             )
@@ -77,8 +77,10 @@ class TestRestDocs(
                 document(
                     "characters-list-example",
                     responseFields(
-                        subsectionWithPath("_embedded.characters").description("An array of <<resources_character, Character resources>>"),
-                        subsectionWithPath("_links").description("<<resources_character_links,Links>> to other resources")
+                        subsectionWithPath("_embedded.characters")
+                            .description("An array of <<resources_character, Character resources>>"),
+                        subsectionWithPath("_links")
+                            .description("<<resources_character_links,Links>> to other resources")
                     )
                 )
             )
