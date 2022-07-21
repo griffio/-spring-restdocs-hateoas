@@ -207,9 +207,8 @@ class TestRestDocs(
         )
     }
 
-    private fun alignmentDescription(): String {
-       return GameCharacterAlignment.values().joinToString(prefix = "One of ", separator = ", ")
-    }
+    private fun alignmentDescription(): String =
+        GameCharacterAlignment.values().joinToString(prefix = "One of ", separator = ", ")
 
     private class ConstrainedFields constructor(input: Class<*>) {
         private val constraintDescriptions = ConstraintDescriptions(input)
