@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
 import org.hibernate.validator.constraints.Range
-import kotlin.math.max
 
 enum class GameCharacterAlignment {
     Chaotic,
@@ -25,12 +24,8 @@ class GameCharacter(
     @get:NotNull val alignment: GameCharacterAlignment
 ) : AbstractPersistable<Long>() {
     @JsonIgnore
-    override fun getId(): Long? {
-        return super.getId()
-    }
+    override fun getId(): Long? = super.getId()
 
     @JsonIgnore
-    override fun isNew(): Boolean {
-        return null == id
-    }
+    override fun isNew(): Boolean = null == id
 }
