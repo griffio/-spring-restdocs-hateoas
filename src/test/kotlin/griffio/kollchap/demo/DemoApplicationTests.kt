@@ -195,13 +195,13 @@ class DemoApplicationTests(
                 .description("Background history and motivation")
                 .type(JsonFieldType.STRING),
             fields.withPath("level")
-                .description("Experience level")
+                .description("Experience and abilities scale. Higher is better")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("armourClass")
-                .description("Armour protection level")
+                .description("Armour and hit protection scale. Lower is better")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("hitPoints")
-                .description("Hit point level")
+                .description("Damage a character can take. Higher is better")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("alignment")
                 .description(alignmentDescription())
