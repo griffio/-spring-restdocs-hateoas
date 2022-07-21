@@ -48,7 +48,7 @@ class Application : RepositoryRestConfigurer {
                 GameCharacter(
                     name = "Zhod Thobi",
                     background = "First-level Cleric joins party as N.P.C and receives equal share of treasure.",
-                    level = 1, armourClass = 3, hitPoints = 9, alignment = Lawful
+                    level = 1, armourClass = 3, hitPoints = 6, alignment = Lawful
                 )
             )
             gameCharacterRepository.save(
