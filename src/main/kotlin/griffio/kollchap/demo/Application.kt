@@ -27,14 +27,14 @@ class Application : RepositoryRestConfigurer {
                 GameCharacter(
                     name = "Slammer Kyntire",
                     background = "First-level Fighter searching for the Sword of the Sorcerer.",
-                    level = 1, armourClass = 14, hitPoints = 7, alignment = Lawful
+                    level = 1, armourClass = 3, hitPoints = 7, alignment = Lawful
                 )
             )
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Hotfa Nap",
                     background = "First-level Sorceress from a nomad tribe in the Mesta Desert.",
-                    level = 1, armourClass = 4, hitPoints = 5, alignment = Neutral
+                    level = 1, armourClass = 9, hitPoints = 5, alignment = Neutral
                 )
             )
             gameCharacterRepository.save(
@@ -48,7 +48,7 @@ class Application : RepositoryRestConfigurer {
                 GameCharacter(
                     name = "Zhod Thobi",
                     background = "First-level Cleric joins party as N.P.C and receives equal share of treasure.",
-                    level = 1, armourClass = 17, hitPoints = 5, alignment = Lawful
+                    level = 1, armourClass = 3, hitPoints = 9, alignment = Lawful
                 )
             )
             gameCharacterRepository.save(
