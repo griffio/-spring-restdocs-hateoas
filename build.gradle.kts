@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("org.springframework.boot") version "2.7.1"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
@@ -37,6 +39,9 @@ kotlin {
         languageVersion.set(JavaLanguageVersion.of("11")) // 1.7.0 kotlin plugin
     }
 }
+
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions.allWarningsAsErrors = true
 
 tasks.withType<Test> {
     useJUnitPlatform()
