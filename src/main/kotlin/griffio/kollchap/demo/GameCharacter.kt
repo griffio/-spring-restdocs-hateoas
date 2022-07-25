@@ -14,12 +14,14 @@ enum class GameCharacterAlignment {
     Lawful,
     Neutral
 }
+
 enum class GameCharacterRace {
     Dwarf,
     Elf,
     Halfling,
     Human
 }
+
 enum class GameCharacterClass {
     Cleric,
     Fighter,
@@ -33,10 +35,10 @@ class GameCharacter(
     @get:NotBlank val background: String,
     @get:NotNull val race: GameCharacterRace,
     @get:NotNull val `class`: GameCharacterClass,
+    @get:NotNull val alignment: GameCharacterAlignment,
     @get:Range(min = 1, max = 20) val level: Int,
     @get:Range(min = 0, max = 9) val armourClass: Int,
     @get:Min(0) val hitPoints: Int,
-    @get:NotNull val alignment: GameCharacterAlignment
 ) : AbstractPersistable<Long>() {
     @JsonIgnore
     override fun getId(): Long? = super.getId()
