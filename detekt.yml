@@ -8,3 +8,11 @@ performance:
   active: true
   SpreadOperator:
     active: false
+
+naming:
+  ConstructorParameterNaming:
+    active: false
+
+complexity:
+  LongParameterList:
+    active: false
