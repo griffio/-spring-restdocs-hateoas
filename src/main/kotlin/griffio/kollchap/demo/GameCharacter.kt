@@ -14,10 +14,17 @@ enum class GameCharacterAlignment {
     Lawful,
     Neutral
 }
+enum class GameCharacterRace {
+    Dwarf,
+    Elf,
+    Halfling,
+    Human
+}
 @Entity(name = "character")
 class GameCharacter(
     @get:NotBlank val name: String,
     @get:NotBlank val background: String,
+    @get:NotNull val race: GameCharacterRace,
     @get:Range(min = 1, max = 20) val level: Int,
     @get:Range(min = 0, max = 9) val armourClass: Int,
     @get:Min(0) val hitPoints: Int,
