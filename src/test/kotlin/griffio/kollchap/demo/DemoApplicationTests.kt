@@ -2,6 +2,9 @@ package griffio.kollchap.demo
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import griffio.kollchap.demo.GameCharacterAlignment.*
+import griffio.kollchap.demo.GameCharacterClass.Thief
+import griffio.kollchap.demo.GameCharacterRace.Dwarf
+import griffio.kollchap.demo.GameCharacterRace.Human
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.notNullValue
 import org.junit.jupiter.api.Test
@@ -35,7 +38,6 @@ class DemoApplicationTests(
     @Autowired val objectMapper: ObjectMapper,
     @Autowired val mvc: MockMvc
 ) {
-
     @Test
     @Throws(Exception::class)
     fun headersExample() {
@@ -111,6 +113,8 @@ class DemoApplicationTests(
         val character = GameCharacter(
             "Bobert",
             "Merchant in the dungeon",
+            Human,
+            Thief,
             level = 2,
             armourClass = 3,
             hitPoints = 6,
@@ -133,7 +137,18 @@ class DemoApplicationTests(
 
     @Test
     fun characterUpdateExample() {
-        val create = objectMapper.writeValueAsString(GameCharacter("New Character", "New Background", 1, 2, 3, Neutral))
+        val create = objectMapper.writeValueAsString(
+            GameCharacter(
+                "New Character",
+                "New Background",
+                Human,
+                GameCharacterClass.Cleric,
+                Neutral,
+                1,
+                2,
+                3
+            )
+        )
 
         val characterLocation =
             mvc.perform(post("/characters").contentType("application/json").content(create))
@@ -141,7 +156,18 @@ class DemoApplicationTests(
                 .andReturn().response.getHeader("Location")
 
         val update =
-            objectMapper.writeValueAsString(GameCharacter("Update name", "Update background", 2, 3, 4, Chaotic))
+            objectMapper.writeValueAsString(
+                GameCharacter(
+                    "Update name",
+                    "Update background",
+                    Dwarf,
+                    GameCharacterClass.Cleric,
+                    Chaotic,
+                    3,
+                    2,
+                    1
+                )
+            )
 
         mvc.perform(
             patch(characterLocation)
@@ -194,6 +220,12 @@ class DemoApplicationTests(
             fields.withPath("background")
                 .description("Background history and motivation")
                 .type(JsonFieldType.STRING),
+            fields.withPath("race")
+                .description(raceDescription())
+                .type(JsonFieldType.STRING),
+            fields.withPath("class")
+                .description(classDescription())
+                .type(JsonFieldType.STRING),
             fields.withPath("level")
                 .description("Experience and abilities scale. Higher is better")
                 .type(JsonFieldType.NUMBER),
@@ -211,6 +243,12 @@ class DemoApplicationTests(
 
     private fun alignmentDescription(): String =
         GameCharacterAlignment.values().joinToString(prefix = "One of ", separator = ", ")
+
+    private fun raceDescription(): String =
+        GameCharacterRace.values().joinToString(prefix = "One of ", separator = ", ")
+
+    private fun classDescription(): String =
+        GameCharacterClass.values().joinToString(prefix = "One of ", separator = ", ")
 
     private class ConstrainedFields constructor(input: Class<*>) {
         private val constraintDescriptions = ConstraintDescriptions(input)
