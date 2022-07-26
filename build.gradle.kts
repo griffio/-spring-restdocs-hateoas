@@ -19,7 +19,8 @@ group = "griffio.kollchap"
 version = "0.0.1-SNAPSHOT"
 
 detekt {
-    toolVersion = "1.21.0"
+    val detektPluginVersion: String by project
+    toolVersion = detektPluginVersion
     buildUponDefaultConfig = true
     config = files("${projectDir}/detekt.yml")
 }
