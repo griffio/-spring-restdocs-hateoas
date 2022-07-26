@@ -1,21 +1,19 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
+    val kotlinPluginVersion = "1.7.10"
     id("org.springframework.boot") version "2.7.1"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("org.asciidoctor.jvm.convert") version "3.3.2"
     id("io.gitlab.arturbosch.detekt").version("1.21.0")
-    kotlin("jvm") version "1.7.0"
-    kotlin("plugin.spring") version "1.7.0"
-    kotlin("plugin.jpa") version "1.7.0"
+    kotlin("jvm") version kotlinPluginVersion
+    kotlin("plugin.spring") version kotlinPluginVersion
+    kotlin("plugin.jpa") version kotlinPluginVersion
 }
-
-group = "griffio.kollchap"
-version = "0.0.1-SNAPSHOT"
-
 repositories {
     mavenCentral()
 }
+group = "griffio.kollchap"
+version = "0.0.1-SNAPSHOT"
 
 detekt {
     toolVersion = "1.21.0"
