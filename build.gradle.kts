@@ -1,17 +1,20 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+// versioning is moved to settings.gradle.kts
 plugins {
-    val kotlinPluginVersion = "1.7.10"
-    id("org.springframework.boot") version "2.7.1"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("org.asciidoctor.jvm.convert") version "3.3.2"
-    id("io.gitlab.arturbosch.detekt").version("1.21.0")
-    kotlin("jvm") version kotlinPluginVersion
-    kotlin("plugin.spring") version kotlinPluginVersion
-    kotlin("plugin.jpa") version kotlinPluginVersion
+    id("io.spring.dependency-management")
+    id("org.springframework.boot")
+    id("org.asciidoctor.jvm.convert")
+    id("io.gitlab.arturbosch.detekt")
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
 }
+
 repositories {
     mavenCentral()
 }
+
 group = "griffio.kollchap"
 version = "0.0.1-SNAPSHOT"
 
