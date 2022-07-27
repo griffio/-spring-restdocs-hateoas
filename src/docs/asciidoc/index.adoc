@@ -146,3 +146,46 @@ operation::character-get-example[snippets='response-fields,curl-request,http-res
 A `PATCH` request is used to update a Character
 
 operation::character-update-example[snippets='request-fields,curl-request,http-response']
+
+[[resources_rooms]]
+== Rooms
+
+The Rooms resources is used to create and list rooms
+
+[[resources_rooms_list]]
+=== Listing rooms
+
+A `GET` request will list all of the service's rooms.
+
+operation::rooms-list-example[snippets='response-fields,curl-request,http-response']
+
+[[resources_rooms_create]]
+=== Creating a room
+
+A `POST` request is used to create a room.
+
+operation::rooms-create-example[snippets='request-fields,curl-request,http-response']
+
+[[resources_room]]
+== Room
+
+The Room resource is used to retrieve, update, and delete individual rooms
+
+[[resources_room_links]]
+=== Links
+
+include::{snippets}/room-get-example/links.adoc[]
+
+[[resources_room_retrieve]]
+=== Retrieve a room
+
+A `GET` request will retrieve the details of a room
+
+operation::room-get-example[snippets='response-fields,curl-request,http-response']
+
+[[resources_room_update]]
+=== Update a Room
+
+A `PATCH` request is used to update a Room
+
+operation::room-update-example[snippets='request-fields,curl-request,http-response']
