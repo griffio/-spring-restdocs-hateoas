@@ -1,7 +1,6 @@
 package griffio.kollchap.demo
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.springframework.data.jpa.domain.AbstractPersistable
 import javax.persistence.Entity
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
@@ -39,7 +38,7 @@ class GameCharacter(
     @get:Range(min = 1, max = 20) val level: Int,
     @get:Range(min = 0, max = 9) val armourClass: Int,
     @get:Min(0) val hitPoints: Int,
-) : AbstractPersistable<Long>() {
+) : MappedIdentity<Long>() {
     @JsonIgnore
     override fun getId(): Long? = super.getId()
 
