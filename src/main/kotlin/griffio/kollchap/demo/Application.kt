@@ -77,5 +77,17 @@ class Application : RepositoryRestConfigurer {
             )
         }
     }
+
+    @Bean
+    fun initLocation(locationRepository: DungeonRoomRepository): CommandLineRunner {
+        return CommandLineRunner {
+            locationRepository.save(
+                DungeonRoom(
+                    "Orc Guardroom",
+                    "In this room are two sets of bunk beds...In the centre is a large battered table..."
+                )
+            )
+        }
+    }
 }
 
