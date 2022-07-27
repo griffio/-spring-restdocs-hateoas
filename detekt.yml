@@ -1,7 +1,7 @@
 style:
   MaxLineLength:
     active: true
-    maxLineLength: 130
+    maxLineLength: 145
   WildcardImport:
     active: false
 performance:
