@@ -4,15 +4,12 @@ import org.springframework.data.domain.Persistable
 import org.springframework.data.util.ProxyUtils
 import org.springframework.lang.Nullable
 import java.io.Serializable
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.MappedSuperclass
-import javax.persistence.Transient
+import javax.persistence.*
 
 @MappedSuperclass
-abstract class MappedPersistable<PK : Serializable> : Persistable<PK> {
+abstract class MappedIdentity<PK : Serializable> : Persistable<PK> {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     private var id: PK? = null
 
@@ -62,7 +59,7 @@ abstract class MappedPersistable<PK : Serializable> : Persistable<PK> {
         if (javaClass != ProxyUtils.getUserClass(other)) {
             return false
         }
-        val that = other as MappedPersistable<*>
+        val that = other as MappedIdentity<*>
         return if (null == getId()) false else getId() == that.getId()
     }
 
