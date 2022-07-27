@@ -4,6 +4,7 @@ import org.springframework.data.domain.Persistable
 import org.springframework.data.util.ProxyUtils
 import org.springframework.lang.Nullable
 import java.io.Serializable
+import java.util.*
 import javax.persistence.*
 
 @MappedSuperclass
@@ -42,7 +43,7 @@ abstract class MappedIdentity<PK : Serializable> : Persistable<PK> {
 	 * @see java.lang.Object#toString()
 	 */
     override fun toString(): String {
-        return String.format("Entity of type %s with id: %s", this.javaClass.name, getId())
+        return String.format(Locale.US, "Entity of type %s with id: %s", this.javaClass.name, getId())
     }
 
     /*
