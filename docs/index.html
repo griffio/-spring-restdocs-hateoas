@@ -498,6 +498,50 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#resources_character_retrieve_http_response">Example response</a></li>
 </ul>
 </li>
+<li><a href="#resources_character_update">Update a Character</a>
+<ul class="sectlevel3">
+<li><a href="#resources_character_update_request_fields">Request fields</a></li>
+<li><a href="#resources_character_update_curl_request">Example request</a></li>
+<li><a href="#resources_character_update_http_response">Example response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#resources_rooms">Rooms</a>
+<ul class="sectlevel2">
+<li><a href="#resources_rooms_list">Listing rooms</a>
+<ul class="sectlevel3">
+<li><a href="#resources_rooms_list_response_fields">Response fields</a></li>
+<li><a href="#resources_rooms_list_curl_request">Example request</a></li>
+<li><a href="#resources_rooms_list_http_response">Example response</a></li>
+</ul>
+</li>
+<li><a href="#resources_rooms_create">Creating a room</a>
+<ul class="sectlevel3">
+<li><a href="#resources_rooms_create_request_fields">Request fields</a></li>
+<li><a href="#resources_rooms_create_curl_request">Example request</a></li>
+<li><a href="#resources_rooms_create_http_response">Example response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#resources_room">Room</a>
+<ul class="sectlevel2">
+<li><a href="#resources_room_links">Links</a></li>
+<li><a href="#resources_room_retrieve">Retrieve a room</a>
+<ul class="sectlevel3">
+<li><a href="#resources_room_retrieve_response_fields">Response fields</a></li>
+<li><a href="#resources_room_retrieve_curl_request">Example request</a></li>
+<li><a href="#resources_room_retrieve_http_response">Example response</a></li>
+</ul>
+</li>
+<li><a href="#resources_room_update">Update a Room</a>
+<ul class="sectlevel3">
+<li><a href="#resources_room_update_request_fields">Request fields</a></li>
+<li><a href="#resources_room_update_curl_request">Example request</a></li>
+<li><a href="#resources_room_update_http_response">Example response</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -610,7 +654,7 @@ use of HTTP status codes.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Content-Type of the payload, e.g. <code>application/hal+json</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Content-Type of the payload <code>application/hal+json</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -669,7 +713,7 @@ that describes the problem. The error object has the following structure:</p>
 Content-Type: application/json
 Content-Length: 101
 
-{"timestamp":"2022-07-17T11:15:29.902+00:00","status":400,"error":"Bad Request","path":"/characters"}</code></pre>
+{"timestamp":"2022-07-27T17:05:54.325+00:00","status":400,"error":"Bad Request","path":"/characters"}</code></pre>
 </div>
 </div>
 </div>
@@ -731,12 +775,15 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/hal+json
-Content-Length: 171
+Content-Length: 239
 
 {
   "_links" : {
     "characters" : {
       "href" : "http://localhost:8080/characters"
+    },
+    "rooms" : {
+      "href" : "http://localhost:8080/rooms"
     },
     "profile" : {
       "href" : "http://localhost:8080/profile"
@@ -765,6 +812,10 @@ Content-Length: 171
 <td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#resources_characters">Characters resource</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rooms</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#resources_rooms">Characters resource</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#resources_profile">ALPS resource</a></p></td>
 </tr>
@@ -783,7 +834,7 @@ Content-Length: 171
 <div class="sect2">
 <h3 id="resources_characters_list"><a class="link" href="#resources_characters_list">Listing characters</a></h3>
 <div class="paragraph">
-<p>A <code>GET</code> request will list all the service&#8217;s characters.</p>
+<p>A <code>GET</code> request will list all of the service&#8217;s characters.</p>
 </div>
 <div class="sect3">
 <h4 id="resources_characters_list_response_fields"><a class="link" href="#resources_characters_list_response_fields">Response fields</a></h4>
@@ -832,13 +883,19 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/hal+json
-Content-Length: 2573
+Content-Length: 4121
 
 {
   "_embedded" : {
     "characters" : [ {
       "name" : "Slammer Kyntire",
       "background" : "First-level Fighter searching for the Sword of the Sorcerer.",
+      "race" : "Human",
+      "class" : "Fighter",
+      "alignment" : "Lawful",
+      "level" : 1,
+      "armourClass" : 3,
+      "hitPoints" : 7,
       "_links" : {
         "self" : {
           "href" : "http://localhost:8080/characters/1"
@@ -850,6 +907,12 @@ Content-Length: 2573
     }, {
       "name" : "Hotfa Nap",
       "background" : "First-level Sorceress from a nomad tribe in the Mesta Desert.",
+      "race" : "Human",
+      "class" : "MagicUser",
+      "alignment" : "Neutral",
+      "level" : 1,
+      "armourClass" : 9,
+      "hitPoints" : 5,
       "_links" : {
         "self" : {
           "href" : "http://localhost:8080/characters/2"
@@ -861,6 +924,12 @@ Content-Length: 2573
     }, {
       "name" : "Gripper 'The Skin' Longshank",
       "background" : "First-level Thief from a tribe on the Albine empire border.",
+      "race" : "Halfling",
+      "class" : "Thief",
+      "alignment" : "Neutral",
+      "level" : 1,
+      "armourClass" : 4,
+      "hitPoints" : 5,
       "_links" : {
         "self" : {
           "href" : "http://localhost:8080/characters/3"
@@ -872,6 +941,12 @@ Content-Length: 2573
     }, {
       "name" : "Zhod Thobi",
       "background" : "First-level Cleric joins party as N.P.C and receives equal share of treasure.",
+      "race" : "Human",
+      "class" : "Cleric",
+      "alignment" : "Lawful",
+      "level" : 1,
+      "armourClass" : 3,
+      "hitPoints" : 6,
       "_links" : {
         "self" : {
           "href" : "http://localhost:8080/characters/4"
@@ -883,6 +958,12 @@ Content-Length: 2573
     }, {
       "name" : "Belisarius",
       "background" : "First-level Thief N.P.C survivor. Currently hiding, if located will join party.",
+      "race" : "Halfling",
+      "class" : "Thief",
+      "alignment" : "Neutral",
+      "level" : 1,
+      "armourClass" : 7,
+      "hitPoints" : 2,
       "_links" : {
         "self" : {
           "href" : "http://localhost:8080/characters/5"
@@ -894,6 +975,12 @@ Content-Length: 2573
     }, {
       "name" : "Rosa Dobbit",
       "background" : "First-level Fighter, N.P.C survivor. Currently captive, if released will join party.",
+      "race" : "Halfling",
+      "class" : "Fighter",
+      "alignment" : "Lawful",
+      "level" : 1,
+      "armourClass" : 9,
+      "hitPoints" : 4,
       "_links" : {
         "self" : {
           "href" : "http://localhost:8080/characters/6"
@@ -903,14 +990,37 @@ Content-Length: 2573
         }
       }
     }, {
-      "name" : "Bobert",
-      "background" : "Merchant in the dungeon",
+      "name" : "Odric",
+      "background" : "Third-level Cleric, N.P.C enemy.\n Currently in possession of the stolen Statue of Tranfax.",
+      "race" : "Human",
+      "class" : "Cleric",
+      "alignment" : "Chaotic",
+      "level" : 1,
+      "armourClass" : 3,
+      "hitPoints" : 9,
       "_links" : {
         "self" : {
           "href" : "http://localhost:8080/characters/7"
         },
         "gameCharacter" : {
           "href" : "http://localhost:8080/characters/7"
+        }
+      }
+    }, {
+      "name" : "Bobert",
+      "background" : "Merchant in the dungeon",
+      "race" : "Human",
+      "class" : "Thief",
+      "alignment" : "Neutral",
+      "level" : 2,
+      "armourClass" : 3,
+      "hitPoints" : 6,
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/characters/8"
+        },
+        "gameCharacter" : {
+          "href" : "http://localhost:8080/characters/8"
         }
       }
     } ]
@@ -937,27 +1047,67 @@ Content-Length: 2573
 <h4 id="resources_characters_create_request_fields"><a class="link" href="#resources_characters_create_request_fields">Request fields</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Path</th>
 <th class="tableblock halign-left valign-top">Type</th>
 <th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraints</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Full name of character</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be blank</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>background</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">background</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Background history and motivation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be blank</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">race</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Dwarf, Elf, Halfling, Human</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be null</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Cleric, Fighter, MagicUser, Thief</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be null</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">level</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Experience and abilities scale. Higher is better</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be at least 1 and at most 20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">armourClass</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Armour and hit protection scale. Lower is better</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be at least 0 and at most 9</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hitPoints</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Damage a character can take. Higher is better</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be at least 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alignment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Chaotic, Lawful, Neutral</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be null</p></td>
 </tr>
 </tbody>
 </table>
@@ -968,7 +1118,7 @@ Content-Length: 2573
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/characters' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -d '{"name":"Bobert","background":"Merchant in the dungeon"}'</code></pre>
+    -d '{"name":"Bobert","background":"Merchant in the dungeon","race":"Human","class":"Thief","alignment":"Neutral","level":2,"armourClass":3,"hitPoints":6}'</code></pre>
 </div>
 </div>
 </div>
@@ -980,7 +1130,7 @@ Content-Length: 2573
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Location: http://localhost:8080/characters/7</code></pre>
+Location: http://localhost:8080/characters/8</code></pre>
 </div>
 </div>
 </div>
@@ -1050,6 +1200,36 @@ Location: http://localhost:8080/characters/7</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Background history and motivation</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>race</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Dwarf, Elf, Halfling, Human</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>class</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Cleric, Fighter, MagicUser, Thief</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>level</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Experience and abilities scale. Higher is better</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>armourClass</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Armour and hit protection scale. Lower is better</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hitPoints</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Damage a character can take. Higher is better</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alignment</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Chaotic, Lawful, Neutral</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#resources_character_links">Links</a> to other resources</p></td>
@@ -1075,11 +1255,17 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/hal+json
-Content-Length: 289
+Content-Length: 413
 
 {
   "name" : "Slammer Kyntire",
   "background" : "First-level Fighter searching for the Sword of the Sorcerer.",
+  "race" : "Human",
+  "class" : "Fighter",
+  "alignment" : "Lawful",
+  "level" : 1,
+  "armourClass" : 3,
+  "hitPoints" : 7,
   "_links" : {
     "self" : {
       "href" : "http://localhost:8080/characters/1"
@@ -1093,13 +1279,428 @@ Content-Length: 289
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="resources_character_update"><a class="link" href="#resources_character_update">Update a Character</a></h3>
+<div class="paragraph">
+<p>A <code>PATCH</code> request is used to update a Character</p>
+</div>
+<div class="sect3">
+<h4 id="resources_character_update_request_fields"><a class="link" href="#resources_character_update_request_fields">Request fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full name of character</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be blank</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">background</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Background history and motivation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be blank</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">race</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Dwarf, Elf, Halfling, Human</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be null</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Cleric, Fighter, MagicUser, Thief</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be null</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">level</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Experience and abilities scale. Higher is better</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be at least 1 and at most 20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">armourClass</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Armour and hit protection scale. Lower is better</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be at least 0 and at most 9</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hitPoints</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Damage a character can take. Higher is better</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be at least 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alignment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of Chaotic, Lawful, Neutral</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be null</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="resources_character_update_curl_request"><a class="link" href="#resources_character_update_curl_request">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/characters/9' -i -X PATCH \
+    -H 'Content-Type: application/hal+json;charset=UTF-8' \
+    -d '{"name":"Update name","background":"Update background","race":"Dwarf","class":"Cleric","alignment":"Chaotic","level":3,"armourClass":2,"hitPoints":1}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resources_character_update_http_response"><a class="link" href="#resources_character_update_http_response">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 204 No Content
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources_rooms"><a class="link" href="#resources_rooms">Rooms</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Rooms resources is used to create and list rooms</p>
+</div>
+<div class="sect2">
+<h3 id="resources_rooms_list"><a class="link" href="#resources_rooms_list">Listing rooms</a></h3>
+<div class="paragraph">
+<p>A <code>GET</code> request will list all of the service&#8217;s rooms.</p>
+</div>
+<div class="sect3">
+<h4 id="resources_rooms_list_response_fields"><a class="link" href="#resources_rooms_list_response_fields">Response fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_embedded.rooms</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An array of <a href="#resources_room">Room resources</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#resources_room_links">Links</a> to other resources</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="resources_rooms_list_curl_request"><a class="link" href="#resources_rooms_list_curl_request">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/rooms' -i -X GET \
+    -H 'Accept: application/hal+json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resources_rooms_list_http_response"><a class="link" href="#resources_rooms_list_http_response">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/hal+json
+Content-Length: 551
+
+{
+  "_embedded" : {
+    "rooms" : [ {
+      "name" : "Orc Guardroom",
+      "description" : "In this room are two sets of bunk beds...In the centre is a large battered table...",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/rooms/1"
+        },
+        "dungeonRoom" : {
+          "href" : "http://localhost:8080/rooms/1"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/rooms"
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/profile/rooms"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resources_rooms_create"><a class="link" href="#resources_rooms_create">Creating a room</a></h3>
+<div class="paragraph">
+<p>A <code>POST</code> request is used to create a room.</p>
+</div>
+<div class="sect3">
+<h4 id="resources_rooms_create_request_fields"><a class="link" href="#resources_rooms_create_request_fields">Request fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of dungeon room</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be blank</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content and objects in room</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be blank</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="resources_rooms_create_curl_request"><a class="link" href="#resources_rooms_create_curl_request">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/rooms' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{"name":"Secret room","description":"Unknown room"}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resources_rooms_create_http_response"><a class="link" href="#resources_rooms_create_http_response">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Location: http://localhost:8080/rooms/3</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources_room"><a class="link" href="#resources_room">Room</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Room resource is used to retrieve, update, and delete individual rooms</p>
+</div>
+<div class="sect2">
+<h3 id="resources_room_links"><a class="link" href="#resources_room_links">Links</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Relation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>self</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This <a href="#resources_room">room</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dungeonRoom</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Link to the room resource</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="resources_room_retrieve"><a class="link" href="#resources_room_retrieve">Retrieve a room</a></h3>
+<div class="paragraph">
+<p>A <code>GET</code> request will retrieve the details of a room</p>
+</div>
+<div class="sect3">
+<h4 id="resources_room_retrieve_response_fields"><a class="link" href="#resources_room_retrieve_response_fields">Response fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of dungeon room</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content and objects in room</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#resources_room_links">Links</a> to other resources</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="resources_room_retrieve_curl_request"><a class="link" href="#resources_room_retrieve_curl_request">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/rooms/1' -i -X GET \
+    -H 'Accept: application/hal+json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resources_room_retrieve_http_response"><a class="link" href="#resources_room_retrieve_http_response">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/hal+json
+Content-Length: 299
+
+{
+  "name" : "Orc Guardroom",
+  "description" : "In this room are two sets of bunk beds...In the centre is a large battered table...",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/rooms/1"
+    },
+    "dungeonRoom" : {
+      "href" : "http://localhost:8080/rooms/1"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resources_room_update"><a class="link" href="#resources_room_update">Update a Room</a></h3>
+<div class="paragraph">
+<p>A <code>PATCH</code> request is used to update a Room</p>
+</div>
+<div class="sect3">
+<h4 id="resources_room_update_request_fields"><a class="link" href="#resources_room_update_request_fields">Request fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of dungeon room</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be blank</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content and objects in room</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must not be blank</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="resources_room_update_curl_request"><a class="link" href="#resources_room_update_curl_request">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/rooms/2' -i -X PATCH \
+    -H 'Content-Type: application/hal+json;charset=UTF-8' \
+    -d '{"name":"Update room","description":"Update description"}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resources_room_update_http_response"><a class="link" href="#resources_room_update_http_response">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 204 No Content
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-07-16 16:13:12 +0100
+Last updated 2022-07-27 17:57:11 +0100
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
