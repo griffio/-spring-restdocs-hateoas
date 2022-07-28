@@ -6,7 +6,7 @@ Verify Restful Api and generate docs from Tests [kotlin/griffio/kollchap/demo/De
 
 Spring Boot 2.7.1
 
-Kotlin 1.7.0
+Kotlin 1.7.10
 
 Asciidoc template located in [/src/docs/asciidoc/index.adoc](https://github.com/griffio/spring-restdocs-hateoas/blob/master/src/docs/asciidoc/index.adoc)
 
