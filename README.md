@@ -10,7 +10,7 @@ Kotlin 1.7.0
 
 Asciidoc template located in [/src/docs/asciidoc/index.adoc](https://github.com/griffio/spring-restdocs-hateoas/blob/master/src/docs/asciidoc/index.adoc)
 
-Sample output doc can be [viewed](https://griffio.github.io/public/spring-restdocs-sample.html) 
+Sample output doc can be [viewed](https://griffio.github.io/spring-restdocs-hateoas/) 
 
 ---
 
