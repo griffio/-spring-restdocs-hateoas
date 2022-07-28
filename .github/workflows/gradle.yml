@@ -44,11 +44,9 @@ jobs:
       uses: actions/upload-pages-artifact@v1.0.0
       with:
         path: build/docs/asciidoc/
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@main
+  # run in dedicated job to avoid oidc error
   deploy:
-
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
