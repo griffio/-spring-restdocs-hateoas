@@ -1,4 +1,6 @@
 style:
+  MagicNumber:
+    active: false
   MaxLineLength:
     active: true
     maxLineLength: 145
@@ -15,4 +17,6 @@ naming:
 
 complexity:
   LongParameterList:
+    active: false
+  LongMethod:
     active: false
