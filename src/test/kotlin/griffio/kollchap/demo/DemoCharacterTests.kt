@@ -76,7 +76,8 @@ class DemoCharacterTests(
             level = 2,
             armourClass = 3,
             hitPoints = 6,
-            alignment = Neutral
+            alignment = Neutral,
+            characteristics = rollCharacteristics()
         )
         val bobert: String = objectMapper.writeValueAsString(character)
         mvc.perform(post("/characters").contentType("application/json").content(bobert))
@@ -104,7 +105,8 @@ class DemoCharacterTests(
                 Neutral,
                 1,
                 2,
-                3
+                3,
+                characteristics = rollCharacteristics()
             )
         )
 
@@ -123,7 +125,8 @@ class DemoCharacterTests(
                     Chaotic,
                     3,
                     2,
-                    1
+                    1,
+                    characteristics = rollCharacteristics()
                 )
             )
 
@@ -169,7 +172,25 @@ class DemoCharacterTests(
                 .type(JsonFieldType.NUMBER),
             fields.withPath("alignment")
                 .description(alignmentDescription())
-                .type(JsonFieldType.STRING)
+                .type(JsonFieldType.STRING),
+            fields.withPath("characteristics.str")
+                .description("Strength character attribute")
+                .type(JsonFieldType.NUMBER),
+            fields.withPath("characteristics.int")
+                .description("Intelligence character attribute")
+                .type(JsonFieldType.NUMBER),
+            fields.withPath("characteristics.wis")
+                .description("Wisdom character attribute")
+                .type(JsonFieldType.NUMBER),
+            fields.withPath("characteristics.dex")
+                .description("Dexterity character attribute")
+                .type(JsonFieldType.NUMBER),
+            fields.withPath("characteristics.con")
+                .description("Constitution character attribute")
+                .type(JsonFieldType.NUMBER),
+            fields.withPath("characteristics.chr")
+                .description("Charisma character attribute")
+                .type(JsonFieldType.NUMBER)
         )
     }
 
