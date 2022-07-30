@@ -19,6 +19,8 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
 import org.springframework.restdocs.payload.FieldDescriptor
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
+import org.springframework.restdocs.payload.RequestBodySnippet
+import org.springframework.restdocs.snippet.Attributes
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -86,7 +88,18 @@ class DemoCharacterTests(
                 document(
                     "characters-create-example",
                     requestFields(
-                        characterFields()
+                        characterFields(),
+                    )
+                )
+            ).andDo(
+                document(
+                    // https://docs.spring.io/spring-restdocs/docs/current/reference/html5/#documenting-your-api-request-response-payloads-subsections-fields
+                    // generates a snippet that can be used to document characteristics once
+                    "characteristics-create-example",
+                    requestFields(
+                        beneathPath("characteristics")
+                            .withSubsectionId("Characteristics"),
+                        characterStatsFields()
                     )
                 )
             )
@@ -173,22 +186,33 @@ class DemoCharacterTests(
             fields.withPath("alignment")
                 .description(alignmentDescription())
                 .type(JsonFieldType.STRING),
-            fields.withPath("characteristics.str")
+            //https://docs.spring.io/spring-restdocs/docs/current/reference/html5/#documenting-your-api-request-response-payloads-subsections
+            subsectionWithPath("characteristics") // allows fields to be documented separately in characterStatsFields
+                .description("<<resources_characteristics_links,STR INT WIS DEX CON CHR>>")
+                .type(JsonFieldType.OBJECT)
+                .attributes(Attributes.key("constraints").value("Must not be null"))
+        )
+    }
+
+    private fun characterStatsFields(): List<FieldDescriptor> {
+        val fields = ConstrainedFields(GameCharacterStats::class.java)
+        return listOf(
+            fields.withPath("str")
                 .description("Strength character attribute")
                 .type(JsonFieldType.NUMBER),
-            fields.withPath("characteristics.int")
+            fields.withPath("int")
                 .description("Intelligence character attribute")
                 .type(JsonFieldType.NUMBER),
-            fields.withPath("characteristics.wis")
+            fields.withPath("wis")
                 .description("Wisdom character attribute")
                 .type(JsonFieldType.NUMBER),
-            fields.withPath("characteristics.dex")
+            fields.withPath("dex")
                 .description("Dexterity character attribute")
                 .type(JsonFieldType.NUMBER),
-            fields.withPath("characteristics.con")
+            fields.withPath("con")
                 .description("Constitution character attribute")
                 .type(JsonFieldType.NUMBER),
-            fields.withPath("characteristics.chr")
+            fields.withPath("chr")
                 .description("Charisma character attribute")
                 .type(JsonFieldType.NUMBER)
         )
