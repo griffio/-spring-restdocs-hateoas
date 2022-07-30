@@ -187,11 +187,9 @@ class DemoCharacterTests(
                 .description(alignmentDescription())
                 .type(JsonFieldType.STRING),
             //https://docs.spring.io/spring-restdocs/docs/current/reference/html5/#documenting-your-api-request-response-payloads-subsections
-            subsectionWithPath("characteristics") // allows fields to be documented separately in characterStatsFields
             fields.subsectionWithPath("characteristics") // allows fields to be documented separately in characterStatsFields
                 .description("<<resources_characteristics_links,STR INT WIS DEX CON CHR>>")
                 .type(JsonFieldType.OBJECT)
-                .attributes(Attributes.key("constraints").value("Must not be null"))
         )
     }
 
@@ -199,22 +197,22 @@ class DemoCharacterTests(
         val fields = ConstrainedFields(GameCharacterStats::class.java)
         return listOf(
             fields.withPath("str")
-                .description("Strength character attribute")
+                .description("Strength attribute")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("int")
-                .description("Intelligence character attribute")
+                .description("Intelligence attribute")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("wis")
-                .description("Wisdom character attribute")
+                .description("Wisdom attribute")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("dex")
-                .description("Dexterity character attribute")
+                .description("Dexterity attribute")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("con")
-                .description("Constitution character attribute")
+                .description("Constitution attribute")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("chr")
-                .description("Charisma character attribute")
+                .description("Charisma attribute")
                 .type(JsonFieldType.NUMBER)
         )
     }
