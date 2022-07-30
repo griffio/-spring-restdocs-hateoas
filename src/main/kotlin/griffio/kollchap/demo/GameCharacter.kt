@@ -40,7 +40,7 @@ class GameCharacter(
     @get:Range(min = 1, max = 20) val level: Int,
     @get:Range(min = 0, max = 9) val armourClass: Int,
     @get:Min(0) val hitPoints: Int,
-    @Embedded val characteristics: GameCharacterStats
+    @Embedded @get:NotNull val characteristics: GameCharacterStats
 ) : MappedIdentity<Long>() {
     @JsonIgnore
     override fun getId(): Long? = super.getId()
