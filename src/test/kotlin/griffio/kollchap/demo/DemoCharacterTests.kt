@@ -98,7 +98,7 @@ class DemoCharacterTests(
                     "characteristics-create-example",
                     requestFields(
                         beneathPath("characteristics")
-                            .withSubsectionId("Characteristics"),
+                            .withSubsectionId("characteristics"),
                         characterStatsFields()
                     )
                 )
