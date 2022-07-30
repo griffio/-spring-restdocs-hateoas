@@ -52,7 +52,7 @@ class DemoApplicationTests(
                     "index-example",
                     links(
                         linkWithRel("characters").description("The <<resources_characters,Characters resource>>"),
-                        linkWithRel("rooms").description("The <<resources_rooms,Characters resource>>"),
+                        linkWithRel("rooms").description("The <<resources_rooms,Rooms resource>>"),
                         linkWithRel("profile").description("The <<resources_profile,ALPS resource>>")
                     ),
                     responseFields(
