@@ -123,6 +123,11 @@ A `POST` request is used to create a character.
 
 operation::characters-create-example[snippets='request-fields,curl-request,http-response']
 
+[[resources_characteristics_links]]
+== Characteristics
+
+operation::characteristics-create-example[snippets='request-fields-characteristics']
+
 [[resources_character]]
 == Character
 
