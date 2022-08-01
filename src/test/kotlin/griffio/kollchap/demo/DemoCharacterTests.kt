@@ -169,10 +169,10 @@ class DemoCharacterTests(
                 .description("Background history and motivation")
                 .type(JsonFieldType.STRING),
             fields.withPath("race")
-                .description(raceDescription())
+                .description(enumDescriptions<GameCharacterRace>())
                 .type(JsonFieldType.STRING),
             fields.withPath("class")
-                .description(classDescription())
+                .description(enumDescriptions<GameCharacterClass>())
                 .type(JsonFieldType.STRING),
             fields.withPath("level")
                 .description("Experience and abilities scale. Higher is better")
@@ -184,7 +184,7 @@ class DemoCharacterTests(
                 .description("Damage a character can take. Higher is better")
                 .type(JsonFieldType.NUMBER),
             fields.withPath("alignment")
-                .description(alignmentDescription())
+                .description(enumDescriptions<GameCharacterAlignment>())
                 .type(JsonFieldType.STRING),
             //https://docs.spring.io/spring-restdocs/docs/current/reference/html5/#documenting-your-api-request-response-payloads-subsections
             fields.subsectionWithPath("characteristics") // allows fields to be documented separately in characterStatsFields
@@ -217,13 +217,7 @@ class DemoCharacterTests(
         )
     }
 
-    private fun alignmentDescription(): String =
-        GameCharacterAlignment.values().joinToString(prefix = "One of ", separator = ", ")
-
-    private fun raceDescription(): String =
-        GameCharacterRace.values().joinToString(prefix = "One of ", separator = ", ")
-
-    private fun classDescription(): String =
-        GameCharacterClass.values().joinToString(prefix = "One of ", separator = ", ")
+    private inline fun <reified T : Enum<T>>enumDescriptions(): String =
+        enumValues<T>().joinToString(prefix = "One of ", separator = ", ")
 
 }
