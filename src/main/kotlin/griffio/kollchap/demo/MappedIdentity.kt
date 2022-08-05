@@ -1,5 +1,6 @@
 package griffio.kollchap.demo
 
+import org.hibernate.annotations.GenericGenerator
 import org.springframework.data.domain.Persistable
 import org.springframework.data.util.ProxyUtils
 import org.springframework.lang.Nullable
@@ -10,7 +11,11 @@ import javax.persistence.*
 @MappedSuperclass
 abstract class MappedIdentity<PK : Serializable> : Persistable<PK> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "entity_id")
+    @GenericGenerator(
+        name = "entity_id",
+        strategy = "griffio.kollchap.demo.EntityIdGenerator"
+    )
     @Nullable
     private var id: PK? = null
 
@@ -19,11 +24,6 @@ abstract class MappedIdentity<PK : Serializable> : Persistable<PK> {
         return id
     }
 
-    /**
-     * Sets the id of the entity.
-     *
-     * @param id the id to set
-     */
     protected fun setId(@Nullable id: PK) {
         this.id = id
     }
@@ -38,18 +38,10 @@ abstract class MappedIdentity<PK : Serializable> : Persistable<PK> {
         return null == getId()
     }
 
-    /*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
     override fun toString(): String {
         return String.format(Locale.US, "Entity of type %s with id: %s", this.javaClass.name, getId())
     }
 
-    /*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
     override fun equals(other: Any?): Boolean {
         if (null == other) {
             return false
@@ -64,10 +56,6 @@ abstract class MappedIdentity<PK : Serializable> : Persistable<PK> {
         return if (null == getId()) false else getId() == that.getId()
     }
 
-    /*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
     override fun hashCode(): Int {
         var hashCode = 17
         hashCode += if (null == getId()) 0 else getId().hashCode() * 31
