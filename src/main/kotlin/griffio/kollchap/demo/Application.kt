@@ -52,7 +52,7 @@ class Application : RepositoryRestConfigurer {
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Zhod Thobi", race = Human, `class` = Cleric,
-                    background = "First-level Cleric joins party as N.P.C and receives equal share of treasure.",
+                    background = "First-level Cleric N.P.C joins party and receives equal share of treasure.",
                     level = 1, armourClass = 3, hitPoints = 6, alignment = Lawful,
                     characteristics = GameCharacterStats(str = 11, int = 14, wis = 15, dex = 10, con = 7, chr = 10)
                 )
@@ -68,7 +68,7 @@ class Application : RepositoryRestConfigurer {
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Rosa Dobbit", race = Halfling, `class` = Fighter,
-                    background = "First-level Fighter, N.P.C survivor. Currently captive, if released will join party.",
+                    background = "First-level Fighter N.P.C survivor. Currently captive, if released will join party.",
                     level = 1, armourClass = 9, hitPoints = 4, alignment = Lawful,
                     characteristics = GameCharacterStats(str = 8, int = 9, wis = 8, dex = 14, con = 13, chr = 12)
                 )
@@ -76,8 +76,7 @@ class Application : RepositoryRestConfigurer {
             gameCharacterRepository.save(
                 GameCharacter(
                     name = "Odric", race = Human, `class` = Cleric,
-                    background = """Third-level Cleric, N.P.C enemy.
-                        | Currently in possession of the stolen Statue of Tranfax.""".trimMargin(),
+                    background = "Third-level Cleric N.P.C enemy. Currently in possession of the stolen Statue of Tranfax.",
                     level = 1, armourClass = 3, hitPoints = 9, alignment = Chaotic,
                     characteristics = GameCharacterStats(str = 5, int = 10, wis = 8, dex = 18, con = 13, chr = 9)
                 )
