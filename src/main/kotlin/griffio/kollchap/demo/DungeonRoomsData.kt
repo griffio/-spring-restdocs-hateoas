@@ -5,7 +5,7 @@ val rooms = mapOf(
     "2" to ("Rubbish Dump" to "This room is used by the inhabitants...It is filled with broken furniture, bones..."),
     "3" to ("Floorless Room" to "This room was once the entrance to the main part of the shrine..."),
     "4" to ("Corridor Trap" to "The Slime is clinging to the west wall and will...fall on a party member..."),
-    "5" to ("Storeroom" to "This room was once a storeroom for the temple...some moldy food remains...)"),
+    "5" to ("Storeroom" to "This room was once a storeroom for the temple...some moldy food remains..."),
     "6" to ("Healing Pool" to "This pool is circular with a radius of about three feet...and has a greenish tint..."),
     "7" to ("Coffin Storeroom" to "This room is bare except for fifteen plain wooden coffins...stacked in threes..."),
     "8" to ("Odric's Bedroom" to "This room has a sumptuously furnished bed with silk sheets..."),
