@@ -6,4 +6,4 @@ import org.springframework.stereotype.Component
 
 @Component // annotation enables Intellij to detect bean
 @RepositoryRestResource(collectionResourceRel = "characters", path = "characters")
-interface GameCharacterRepository : CrudRepository<GameCharacter, Long>
+interface GameCharacterRepository : CrudRepository<GameCharacter, String>

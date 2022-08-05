@@ -41,9 +41,9 @@ class GameCharacter(
     @get:Range(min = 0, max = 9) val armourClass: Int,
     @get:Min(0) val hitPoints: Int,
     @Embedded @get:NotNull val characteristics: GameCharacterStats
-) : MappedIdentity<Long>() {
+) : MappedIdentity<String>() {
     @JsonIgnore
-    override fun getId(): Long? = super.getId()
+    override fun getId(): String? = super.getId()
 
     @JsonIgnore
     override fun isNew(): Boolean = null == id

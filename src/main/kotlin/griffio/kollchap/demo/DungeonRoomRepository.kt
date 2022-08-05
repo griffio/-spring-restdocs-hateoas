@@ -6,4 +6,4 @@ import org.springframework.stereotype.Component
 
 @Component // annotation enables Intellij to detect bean
 @RepositoryRestResource(collectionResourceRel = "rooms", path = "rooms")
-interface DungeonRoomRepository : CrudRepository<DungeonRoom, Long>
+interface DungeonRoomRepository : CrudRepository<DungeonRoom, String>
