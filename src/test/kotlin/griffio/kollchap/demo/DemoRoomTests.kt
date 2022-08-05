@@ -22,7 +22,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @AutoConfigureMockMvc
 class DemoRoomTests(
     @Autowired val objectMapper: ObjectMapper,
-    @Autowired val mvc: MockMvc
+    @Autowired val mvc: MockMvc,
+    @Autowired val roomRepository: DungeonRoomRepository
 ) {
     @Test
     fun roomsListExample() {
@@ -43,7 +44,8 @@ class DemoRoomTests(
 
     @Test
     fun roomGetExample() {
-        mvc.perform(get("/rooms/1").accept(MediaTypes.HAL_JSON))
+        val firstRoom = roomRepository.findAll().first()
+        mvc.perform(get("/rooms/${firstRoom.id}").accept(MediaTypes.HAL_JSON))
             .andExpect(status().isOk)
             .andDo(
                 document(
@@ -64,6 +66,7 @@ class DemoRoomTests(
     @Test
     fun roomsCreateExample() {
         val create = DungeonRoom(
+            "42",
             "Secret room",
             "Unknown room",
         )
@@ -86,6 +89,7 @@ class DemoRoomTests(
     fun roomUpdateExample() {
         val create = objectMapper.writeValueAsString(
             DungeonRoom(
+                "44",
                 "New room",
                 "New description"
             )
@@ -99,6 +103,7 @@ class DemoRoomTests(
         val update =
             objectMapper.writeValueAsString(
                 DungeonRoom(
+                    "44a",
                     "Update room",
                     "Update description"
                 )
@@ -123,6 +128,9 @@ class DemoRoomTests(
     private fun roomFields(): List<FieldDescriptor> {
         val fields = ConstrainedFields(DungeonRoom::class.java)
         return listOf(
+            fields.withPath("key")
+                .description("map key of dungeon room")
+                .type(JsonFieldType.STRING),
             fields.withPath("name")
                 .description("Name of dungeon room")
                 .type(JsonFieldType.STRING),

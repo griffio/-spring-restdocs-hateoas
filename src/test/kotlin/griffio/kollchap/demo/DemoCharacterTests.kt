@@ -19,8 +19,6 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
 import org.springframework.restdocs.payload.FieldDescriptor
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
-import org.springframework.restdocs.payload.RequestBodySnippet
-import org.springframework.restdocs.snippet.Attributes
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -29,7 +27,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @AutoConfigureMockMvc
 class DemoCharacterTests(
     @Autowired val objectMapper: ObjectMapper,
-    @Autowired val mvc: MockMvc
+    @Autowired val mvc: MockMvc,
+    @Autowired val characterRepository: GameCharacterRepository
 ) {
     @Test
     fun charactersListExample() {
@@ -50,7 +49,8 @@ class DemoCharacterTests(
 
     @Test
     fun characterGetExample() {
-        mvc.perform(get("/characters/1").accept(MediaTypes.HAL_JSON))
+        val firstCharacter = characterRepository.findAll().first()
+        mvc.perform(get("/characters/${firstCharacter.id}").accept(MediaTypes.HAL_JSON))
             .andExpect(status().isOk)
             .andDo(
                 document(
