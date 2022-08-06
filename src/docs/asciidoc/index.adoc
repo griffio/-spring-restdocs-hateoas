@@ -194,3 +194,10 @@ operation::room-get-example[snippets='response-fields,curl-request,http-response
 A `PATCH` request is used to update a Room
 
 operation::room-update-example[snippets='request-fields,curl-request,http-response']
+
+[[resources_room_search_keys]]
+=== Retrieve a room by key attribute
+
+A `GET` request will retrieve the details of a room
+
+operation::room-keys-example[snippets='request-parameters,curl-request,http-response']

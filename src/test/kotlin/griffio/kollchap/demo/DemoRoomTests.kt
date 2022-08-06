@@ -14,6 +14,8 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
 import org.springframework.restdocs.payload.FieldDescriptor
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
+import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
+import org.springframework.restdocs.request.RequestDocumentation.requestParameters
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -120,6 +122,18 @@ class DemoRoomTests(
                     "room-update-example",
                     requestFields(
                         roomFields()
+                    )
+                )
+            )
+    }
+
+    @Test
+    fun roomsSearchKeysExample() {
+        mvc.perform(get("/rooms/search/keys?key=1").accept(MediaTypes.HAL_JSON))
+            .andExpect(status().isOk).andDo(
+                document(
+                    "room-keys-example", requestParameters(
+                        parameterWithName("key").description("The room to retrieve using the map key"),
                     )
                 )
             )
