@@ -55,6 +55,7 @@ class DemoRoomTests(
                     links(
                         linkWithRel("self").description("This <<resources_room,room>>"),
                         linkWithRel("dungeonRoom").description("Link to the room resource"),
+                        linkWithRel("egress").description("Link to other connected room resources"),
                     ),
                     responseFields(
                         roomFields().plus(
@@ -71,6 +72,7 @@ class DemoRoomTests(
             "42",
             "Secret room",
             "Unknown room",
+            arrayOf("41a")
         )
         val room: String = objectMapper.writeValueAsString(create)
         mvc.perform(post("/rooms").contentType("application/json").content(room))
@@ -93,7 +95,8 @@ class DemoRoomTests(
             DungeonRoom(
                 "44",
                 "New room",
-                "New description"
+                "New description",
+                arrayOf("44a")
             )
         )
 
@@ -107,7 +110,8 @@ class DemoRoomTests(
                 DungeonRoom(
                     "44a",
                     "Update room",
-                    "Update description"
+                    "Update description",
+                    arrayOf("44")
                 )
             )
 
@@ -148,6 +152,9 @@ class DemoRoomTests(
             fields.withPath("name")
                 .description("Name of dungeon room")
                 .type(JsonFieldType.STRING),
+            fields.withPath("egress")
+                .description("connected rooms in the dungeon")
+                .type(JsonFieldType.ARRAY),
             fields.withPath("description")
                 .description("Content and objects in room")
                 .type(JsonFieldType.STRING),
