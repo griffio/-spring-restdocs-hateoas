@@ -10,7 +10,8 @@ class DungeonRoom(
     @get:NotBlank @Column(name = "map_key") val key: String,
     @get:NotBlank val name: String,
     @get:NotBlank val description: String,
-) : MappedIdentity<String>() {
+    val egress: Array<String>
+    ) : MappedIdentity<String>() {
     @JsonIgnore
     override fun getId(): String? = super.getId()
 

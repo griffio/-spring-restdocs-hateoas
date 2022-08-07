@@ -24,5 +24,32 @@ val rooms = mapOf(
     "20" to ("Cave" to "This room is a cave littered with rocks and boulders...the atmosphere is humid..."),
     "21" to ("Statue Room" to "In the centre of the room is a statue of a man with his hands held out..."),
     "22" to ("Meditation Room" to "This room was originally a meditation room...the walls are ornately decorated..."),
-    "23" to ("Flooded Storeroom" to "The stairs leading down are wet and so anyone going down them..."),
+    "23" to ("Flooded Storeroom" to "The stairs leading down are wet and so anyone going down them...")
+)
+// mapping of room to possible points of egress
+val egress = mapOf(
+    "1"  to arrayOf("2", "4", "5", "6"),
+    "2"  to arrayOf("1", "4", "5", "6"),
+    "3"  to arrayOf("4", "16", "17", "18"),
+    "4"  to arrayOf("1", "2", "3", "5", "6"),
+    "5"  to arrayOf("1", "2", "3", "5", "6"),
+    "6"  to arrayOf("1", "2", "4", "5", "7", "8"),
+    "7"  to arrayOf("6", "8"),
+    "8"  to arrayOf("6", "7", "10", "12"),
+    "9"  to arrayOf("6", "7", "9a", "10", "12"),
+    "9a" to arrayOf("9"),
+    "10" to arrayOf("8", "9", "11", "12"),
+    "11" to arrayOf("10", "12", "21", "22", "23"),
+    "12" to arrayOf("8", "9", "10", "11", "13", "15", "21", "22", "23"),
+    "13" to arrayOf("12"),
+    "14" to arrayOf("8", "15"),
+    "15" to arrayOf("10", "12", "21", "22", "23"),
+    "16" to arrayOf("3", "17", "18", "19", "21"),
+    "17" to arrayOf("3", "16", "18", "19", "20", "21"),
+    "18" to arrayOf("3", "16", "17", "19", "20", "21"),
+    "19" to arrayOf("3", "16", "17", "18", "20", "21"),
+    "20" to arrayOf("3", "16", "17", "18", "21"),
+    "21" to arrayOf("3", "11", "12", "16", "17", "18", "19", "22", "23"),
+    "22" to arrayOf("11", "12", "21", "23"),
+    "23" to arrayOf("11", "12", "16", "21", "22", "23")
 )

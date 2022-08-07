@@ -88,7 +88,12 @@ class Application : RepositoryRestConfigurer {
     fun initLocation(roomRepository: DungeonRoomRepository) = CommandLineRunner {
         for (room in rooms) {
             roomRepository.save(
-                DungeonRoom(key = room.key, name = room.value.first, description = room.value.second)
+                DungeonRoom(
+                    key = room.key,
+                    name = room.value.first,
+                    description = room.value.second,
+                    egress = egress.getOrDefault(room.key, emptyArray())
+                )
             )
         }
     }
