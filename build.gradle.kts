@@ -37,6 +37,8 @@ dependencies {
     // configures asciidoctor plugin with restdocs settings
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
     runtimeOnly("com.h2database:h2")
+    // install hal client http://localhost:8080/webjars/hal-explorer/1.1.0/index.html#uri=/
+    runtimeOnly("org.webjars:hal-explorer:1.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }

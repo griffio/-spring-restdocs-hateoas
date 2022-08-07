@@ -51,3 +51,7 @@ Restdocs index
 http://localhost:8080/docs/index.html
 ~~~
 
+HAL explorer client
+~~~
+http://localhost:8080/webjars/hal-explorer/1.1.0/index.html#uri=/
+~~~
