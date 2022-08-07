@@ -17,7 +17,9 @@ class DungeonRoomController(
     override fun process(model: EntityModel<DungeonRoom>): EntityModel<DungeonRoom> {
         model.content?.let { room ->
             for (key in room.egress) {
-                model.add(linkTo<DungeonRoomController> { roomByKey(key) }.withRel("egress"))
+                rooms[key]?.let { r ->
+                    model.add(linkTo<DungeonRoomController> { roomByKey(key) }.withRel("egress").withName(r.first))
+                }
             }
         }
         return model;
