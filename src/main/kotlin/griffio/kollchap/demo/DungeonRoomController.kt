@@ -28,8 +28,8 @@ class DungeonRoomController(
     // Adding a custom path to locate a room by its natural map key as the id is considered auto generated
     @GetMapping("/rooms/keys/{key}")
     fun roomByKey(@PathVariable("key") key: String): ResponseEntity<EntityModel<DungeonRoom>> =
-        when (val room = dungeonRoomRepository.findByKey(key)) {
-            null -> ResponseEntity.notFound().build()
-            else -> ResponseEntity.ok(EntityModel.of(room))
-        }
+        dungeonRoomRepository.findByKey(key).toResponseEntity()
 }
+
+fun DungeonRoom?.toResponseEntity(): ResponseEntity<EntityModel<DungeonRoom>> =
+    if (this == null) ResponseEntity.notFound().build() else ResponseEntity.ok(EntityModel.of(this))
