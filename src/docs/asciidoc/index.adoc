@@ -12,6 +12,17 @@ griffio;
 [[overview]]
 = Overview
 
+
+[graphviz]
+....
+digraph D {
+
+  A -> {B, C, D} -> {F}
+
+}
+....
+
+
 [[overview_http_verbs]]
 == HTTP verbs
 
