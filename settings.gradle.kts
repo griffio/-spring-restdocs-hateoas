@@ -7,6 +7,7 @@ pluginManagement {
     val springDependencyPluginVersion: String by settings
     val springBootPluginVersion: String by settings
     val asciiDocPluginVersion: String by settings
+    val asciiDocGemsVersion: String by settings
     val detektPluginVersion: String by settings
 
     repositories {
@@ -21,6 +22,7 @@ pluginManagement {
         id("io.spring.dependency-management") version springDependencyPluginVersion
         id("org.springframework.boot") version springBootPluginVersion
         id("org.asciidoctor.jvm.convert") version asciiDocPluginVersion
+        id("org.asciidoctor.jvm.gems") version asciiDocGemsVersion
         id("io.gitlab.arturbosch.detekt") version detektPluginVersion
     }
 }

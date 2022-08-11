@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management")
     id("org.springframework.boot")
     id("org.asciidoctor.jvm.convert")
+    id("org.asciidoctor.jvm.gems")
     id("io.gitlab.arturbosch.detekt")
     kotlin("jvm")
     kotlin("plugin.spring")
@@ -13,6 +14,9 @@ plugins {
 
 repositories {
     mavenCentral()
+    ruby {
+        gems()
+    }
 }
 
 group = "griffio.kollchap"
@@ -34,6 +38,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.hibernate.validator:hibernate-validator")
+    asciidoctorGems("rubygems", "asciidoctor-diagram", "+")
     // configures asciidoctor plugin with restdocs settings
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
     runtimeOnly("com.h2database:h2")
@@ -65,6 +70,8 @@ tasks.test {
 }
 // https://github.com/spring-io/initializr/issues/922
 tasks.asciidoctor {
+    asciidoctorj.requires("asciidoctor-diagram")
+    asciidoctorj.modules { diagram.use() }
     configurations(asciidoctorExt.name) // set as per docs
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
