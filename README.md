@@ -1,4 +1,4 @@
-# Kollchap spring hateoas rest-docs
+# Kollchap Restful Dungeon spring hateoas rest-docs
 
 Building up example with [Spring REST Docs 2.0.6](https://github.com/spring-projects/spring-restdocs)
 
@@ -16,6 +16,10 @@ Asciidoc template located in [/src/docs/asciidoc/index.adoc](https://github.com/
 Use GitHub action to build asciidoc and publish html to GitHubPages
 
 The published restdoc can be viewed here [https://griffio.github.io/spring-restdocs-hateoas](https://griffio.github.io/spring-restdocs-hateoas/) 
+
+![image](https://user-images.githubusercontent.com/346896/187029634-f1417b98-0a49-42e0-8e7b-9143d8910dee.png)
+
+The Dungeons Of Kollchap - from https://en.wikipedia.org/wiki/What_Is_Dungeons_%26_Dragons%3F
 
 ---
 
