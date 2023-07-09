@@ -7,9 +7,9 @@ Building up example with [Spring REST Docs 2.0.6](https://github.com/spring-proj
 
 Verify Restful Api and generate docs from Tests [kotlin/griffio/kollchap/demo/DemoApplicationTests.kt](https://github.com/griffio/spring-restdocs-hateoas/blob/master/src/test/kotlin/griffio/kollchap/demo/DemoApplicationTests.kt)
 
-Spring Boot 2.7.1
+Spring Boot 3.1.1
 
-Kotlin 1.7.10
+Kotlin 1.8.21
 
 Asciidoc template located in [/src/docs/asciidoc/index.adoc](https://github.com/griffio/spring-restdocs-hateoas/blob/master/src/docs/asciidoc/index.adoc)
 
@@ -20,6 +20,10 @@ The published restdoc can be viewed here [https://griffio.github.io/spring-restd
 ![image](https://user-images.githubusercontent.com/346896/187029634-f1417b98-0a49-42e0-8e7b-9143d8910dee.png)
 
 The Dungeons Of Kollchap - from https://en.wikipedia.org/wiki/What_Is_Dungeons_%26_Dragons%3F
+
+### Changes
+
+* javax.persistence -> jakarta.persistence
 
 ---
 
@@ -40,7 +44,7 @@ Run all tasks and create deployable jar
 ./gradlew bootJar
 ~~~
 
-Execute jar with compatible Java 11
+Execute jar with compatible Java 17
 ~~~
 java -jar build/libs/kollchap-0.0.1-SNAPSHOT.jar
 ~~~
