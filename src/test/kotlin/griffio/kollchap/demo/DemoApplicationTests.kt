@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import javax.servlet.RequestDispatcher
+import jakarta.servlet.RequestDispatcher
 
 @SpringBootTest(classes = [Application::class])
 @AutoConfigureRestDocs

@@ -1,14 +1,14 @@
 package griffio.kollchap.demo
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import javax.persistence.Entity
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
+import jakarta.persistence.Entity
+import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 
 import org.hibernate.validator.constraints.Range
-import javax.persistence.Embeddable
-import javax.persistence.Embedded
+import jakarta.persistence.Embeddable
+import jakarta.persistence.Embedded
 
 enum class GameCharacterAlignment {
     Chaotic,

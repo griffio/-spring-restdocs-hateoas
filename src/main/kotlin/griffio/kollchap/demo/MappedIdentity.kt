@@ -6,7 +6,7 @@ import org.springframework.data.util.ProxyUtils
 import org.springframework.lang.Nullable
 import java.io.Serializable
 import java.util.*
-import javax.persistence.*
+import jakarta.persistence.*
 
 @MappedSuperclass
 abstract class MappedIdentity<PK : Serializable> : Persistable<PK> {

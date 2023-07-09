@@ -6,7 +6,7 @@ import org.springframework.restdocs.payload.PayloadDocumentation
 import org.springframework.restdocs.snippet.Attributes
 
 /**
- * Utility for extracting javax.validator annotations into a restdocs "constraints" custom attribute
+ * Utility for extracting jakarta.validator annotations into a restdocs "constraints" custom attribute
  * see resources/org/springframework/restdocs/templates/request-fields.snippet
  */
 class ConstrainedFields constructor(input: Class<*>) {

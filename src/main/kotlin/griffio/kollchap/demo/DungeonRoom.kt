@@ -1,9 +1,9 @@
 package griffio.kollchap.demo
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.validation.constraints.NotBlank
+import jakarta.persistence.Entity
+import jakarta.persistence.Column
+import jakarta.validation.constraints.NotBlank
 
 @Entity(name = "room")
 class DungeonRoom(
