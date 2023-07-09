@@ -32,7 +32,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.hibernate.validator:hibernate-validator")
     // configures asciidoctor plugin with restdocs settings
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
@@ -46,7 +45,7 @@ dependencies {
 kotlin {
     // https://blog.jetbrains.com/kotlin/2021/11/gradle-jvm-toolchain-support-in-the-kotlin-plugin/
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of("11")) // 1.7.0 kotlin plugin
+        languageVersion.set(JavaLanguageVersion.of("17"))
     }
 }
 
