@@ -1,15 +1,15 @@
 # Kollchap Restful Dungeon spring hateoas rest-docs
 
-Building up example with [Spring REST Docs 2.0.6](https://github.com/spring-projects/spring-restdocs)
+Building up example with [Spring REST Docs 3.0.3](https://github.com/spring-projects/spring-restdocs)
 
 * Added javax.validator constraints to be pulled out
 * Added subsection to pull out DnD character stats
 
 Verify Restful Api and generate docs from Tests [kotlin/griffio/kollchap/demo/DemoApplicationTests.kt](https://github.com/griffio/spring-restdocs-hateoas/blob/master/src/test/kotlin/griffio/kollchap/demo/DemoApplicationTests.kt)
 
-Spring Boot 3.1.1
+Spring Boot 3.4.0
 
-Kotlin 1.8.21
+Kotlin 2.0.10 https://detekt.dev/docs/introduction/compatibility/#tool-versions
 
 Asciidoc template located in [/src/docs/asciidoc/index.adoc](https://github.com/griffio/spring-restdocs-hateoas/blob/master/src/docs/asciidoc/index.adoc)
 
@@ -25,6 +25,7 @@ The Dungeons Of Kollchap - from https://en.wikipedia.org/wiki/What_Is_Dungeons_%
 
 * javax.persistence -> jakarta.persistence
 
+* Kotlin aligned with https://detekt.dev/docs/introduction/compatibility/#tool-versions
 ---
 
 Tasks
@@ -39,7 +40,7 @@ Run tests only - does not generate index.html
 ./gradlew test
 ~~~
 
-Run all tasks and create deployable jar
+Run all tasks and create deployable jar with restdocs copied to static docs
 ~~~
 ./gradlew bootJar
 ~~~
