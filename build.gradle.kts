@@ -43,14 +43,15 @@ dependencies {
 }
 
 kotlin {
+    compilerOptions {
+        allWarningsAsErrors = true
+    }
+
     // https://blog.jetbrains.com/kotlin/2021/11/gradle-jvm-toolchain-support-in-the-kotlin-plugin/
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of("21"))
     }
 }
-
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.allWarningsAsErrors = true
 
 tasks.withType<Test> {
     useJUnitPlatform()
