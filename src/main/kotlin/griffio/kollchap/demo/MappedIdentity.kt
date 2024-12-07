@@ -1,21 +1,23 @@
 package griffio.kollchap.demo
 
-import org.hibernate.annotations.GenericGenerator
+import jakarta.persistence.*
+import org.hibernate.annotations.IdGeneratorType
 import org.springframework.data.domain.Persistable
 import org.springframework.data.util.ProxyUtils
 import org.springframework.lang.Nullable
 import java.io.Serializable
+
 import java.util.*
-import jakarta.persistence.*
+
+@IdGeneratorType(EntityIdGenerator::class)
+@Retention(AnnotationRetention.RUNTIME) @Target(AnnotationTarget.FUNCTION, AnnotationTarget.FIELD)
+annotation class EntityGeneratedId
 
 @MappedSuperclass
 abstract class MappedIdentity<PK : Serializable> : Persistable<PK> {
     @Id
     @GeneratedValue(generator = "entity_id")
-    @GenericGenerator(
-        name = "entity_id",
-        strategy = "griffio.kollchap.demo.EntityIdGenerator"
-    )
+    @EntityGeneratedId
     @Nullable
     private var id: PK? = null
 
