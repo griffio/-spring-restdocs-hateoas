@@ -22,7 +22,7 @@ detekt {
     val detektPluginVersion: String by project
     toolVersion = detektPluginVersion
     buildUponDefaultConfig = true
-    config = files("${projectDir}/detekt.yml")
+    config.setFrom("${projectDir}/detekt.yml")
 }
 // custom classpath config as per https://github.com/spring-projects/spring-restdocs/blob/main/samples/rest-notes-spring-hateoas/build.gradle
 val asciidoctorExt: Configuration by configurations.creating
@@ -45,7 +45,7 @@ dependencies {
 kotlin {
     // https://blog.jetbrains.com/kotlin/2021/11/gradle-jvm-toolchain-support-in-the-kotlin-plugin/
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of("17"))
+        languageVersion.set(JavaLanguageVersion.of("21"))
     }
 }
 
@@ -69,8 +69,8 @@ tasks.asciidoctor {
     dependsOn(tasks.test)
 }
 // copy index.html 
-// https://docs.spring.io/spring-boot/docs/2.1.x/reference/html/boot-features-developing-web-applications.html#boot-features-spring-mvc-static-content
-tasks.bootJar {
+//https://docs.spring.io/spring-boot/reference/web/servlet.html#web.servlet.spring-mvc.static-content
+ tasks.bootJar {
     dependsOn(tasks.asciidoctor)
     from(tasks.asciidoctor.get().outputDir) {
         into("static/docs")
